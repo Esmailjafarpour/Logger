@@ -1,24 +1,21 @@
-import logo from './logo.svg';
+import React ,{ useEffect } from 'react';
+
+import 'materialize-css/dist/css/materialize.min.css';
+import Materialize from 'materialize-css/dist/js/materialize.min.js';
+
+import SearchBar from './components/layout/SearchBar';
 import './App.css';
 
 function App() {
+
+  useEffect(() => {
+    Materialize.AutoInit();
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <SearchBar/>
+    </>
   );
 }
 
