@@ -1,14 +1,19 @@
 import React ,{ useState,useEffect } from 'react';
 import TechItem from './TechItem';
+import {connect} from 'react-redux';
+import {deleteTech} from '../action/logAction';
 
-function TechListModal() {
+function TechListModal({idTech,deleteTech}) {
 
     const [techs, setTechs] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        getTechs();
-    }, []);
+        if(idTech !== false){
+            getTechs();
+        }
+    
+    }, [idTech]);
 
     const getTechs = async () => {
         setLoading(true)
@@ -16,6 +21,7 @@ function TechListModal() {
         const data = await res.json();
         setTechs(data);
         setLoading(false)
+        deleteTech(false)
     }
 
 
@@ -32,5 +38,9 @@ function TechListModal() {
         </div>
     );
   }
+
+  const mapStateToProps = (state) =>({
+    idTech : state.log.idTech
+  })
   
-  export default TechListModal;
+  export default connect(mapStateToProps,{deleteTech})(TechListModal);

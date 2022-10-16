@@ -1,18 +1,43 @@
-import React , {useState} from 'react';
+import React , {useState,useEffect} from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {addLogs} from '../action/logAction';
+ 
 
 
-const AddLogModal = () => {
+const AddLogModal = ({addLogs}) => {
 
     const [message, setMassege] = useState('');
     const [attention, setAttention] = useState(false);
     const [tech, setTech] = useState('');
+    const [techs, setTechs] = useState([]);
+
+    useEffect(() => {
+        getTechs();
+    },[]);
+
+    const getTechs = async () => {
+        // setLoading(true)
+        const res = await fetch('/techs');
+        const data = await res.json();
+        setTechs(data);
+       
+    }
 
     const onSubmit = () => {
         if (message === '' || tech === '') {
             M.toast({html:"Please Enter a Message and Tech"})
         } else {
-            console.log(message,attention,tech)
+            // console.log(message,attention,tech)
+            const newLog = {
+                message,
+                attention,
+                tech,
+                date : new Date()
+            }
+            addLogs(newLog);
+            M.toast({html:`Log added by ${tech}`})
             setMassege('');
             setAttention(false);
             setTech('');
@@ -45,9 +70,12 @@ const AddLogModal = () => {
                             onChange={e => setTech(e.target.value)}
                         >
                             <option value="" disabled>Select Technician</option>
-                            <option value="sara bagheri">sara bagheri</option>
-                            <option value="mehdi Ahmadi">mehdi Ahmadi</option>
-                            <option value="Ali Mohamadi">Ali Mohamadi</option>
+                            {techs.map(tech => (
+                            <option value={tech.firstname + ' ' + tech.lastname} key={tech.id}>
+                                {tech.firstname + ' ' + tech.lastname}
+                            </option>
+                            ))}
+                            
                         </select>
                     </div>
                 </div>
@@ -81,9 +109,14 @@ const AddLogModal = () => {
     )
 }
 
+AddLogModal.propsTypes = { 
+    addLog : PropTypes.object.isRequired,
+}
+
+
 const modalStyle = {
     width : '75%',
     height : '75%'
 }
 
-export default AddLogModal;
+export default connect(null,{addLogs})(AddLogModal);

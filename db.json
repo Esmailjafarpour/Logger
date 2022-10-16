@@ -1,43 +1,19 @@
 {
-    "logs":[
-        {
-            "id":1,
-            "message":"Changed hard drive on workstation 005",
-            "attention":false,
-            "date":"03-02-2019",
-            "tech":"Sara Bagheri"
-        },
-        {
-            "id":2,
-            "message":"Workstation 007 not posting",
-            "attention":true,
-            "date":"03-03-2019",
-            "tech":"Mehdi Ahmadi"
-        },
-        {
-            "id":3,
-            "message":"Changed memory on workstation050",
-            "attention":false,
-            "date":"03-07-2019",
-            "tech":"Ali Mohammadi"
-        }
-
-    ],
-    "techs":[
-        {
-            "id":1,
-            "firstName":"Sara",
-            "lastName":"Bagheri"
-        },
-        {
-            "id":2,
-            "firstName":"Mehdi",
-            "lastName":"Ahmadi"
-        },
-        {
-            "id":3,
-            "firstName":"Ali",
-            "lastName":"Mohammadi"
-        }
-    ]
+  "logs": [
+    {
+      "id": 2,
+      "message": "iuiui",
+      "attention": false,
+      "tech": "sara bagheri",
+      "date": "2022-10-16T09:35:30.536Z"
+    },
+    {
+      "id": 3,
+      "message": "no Click",
+      "attention": false,
+      "tech": "mehdi Ahmadi",
+      "date": "2022-10-16T06:18:53.940Z"
+    }
+  ],
+  "techs": []
 }
