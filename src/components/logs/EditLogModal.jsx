@@ -10,20 +10,25 @@ const EditLogModal = ({updateLog , current}) => {
     const [message, setMessege] = useState('');
     const [attention, setAttention] = useState(false);
     const [tech, setTech] = useState('');
+    const [techs, setTechs] = useState([]);
 
-    
     useEffect(() => {
-
+        getTechs()
         if (current) {
             setMessege(current.message);
             setAttention(current.attention);
             setTech(current.tech);
         }
-        
-    }, [current]);
+    },[current]);
+
+    const getTechs = async ()=>{
+        const res = await fetch('/techs');
+        const data = await res.json();
+        setTechs(data);
+    }
 
     const onSubmit = () => {
-        if (message === '' || tech === '') {
+        if (message === '' || tech === ''){
             M.toast({html:"Please Enter a Message and Tech"})
         } else {
             const updtLog = {
@@ -68,9 +73,12 @@ const EditLogModal = ({updateLog , current}) => {
                             onChange={e => setTech(e.target.value)}
                         >
                             <option value="" disabled>Select Technician</option>
-                            <option value="sara bagheri">sara bagheri</option>
-                            <option value="mehdi Ahmadi">mehdi Ahmadi</option>
-                            <option value="Ali Mohamadi">Ali Mohamadi</option>
+                            {techs.map(tech => 
+                                <option value={`${tech.firstName +' '+tech.lastName}`}>
+                                    {tech.firstName +' '+tech.lastName}
+                                </option>
+                            )}
+                           
                         </select>
                     </div>
                 </div>

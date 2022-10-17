@@ -71,8 +71,8 @@ const AddLogModal = ({addLogs}) => {
                         >
                             <option value="" disabled>Select Technician</option>
                             {techs.map(tech => (
-                            <option value={tech.firstname + ' ' + tech.lastname} key={tech.id}>
-                                {tech.firstname + ' ' + tech.lastname}
+                            <option value={tech.firstName + ' ' + tech.lastName} key={tech.id}>
+                                {tech.firstName + ' ' + tech.lastName}
                             </option>
                             ))}
                             

@@ -1,11 +1,10 @@
-import {GET_LOGS,SET_LOADING,LOGS_ERROR,ADD_LOG,DELETE_LOG,SET_CURRENT,CLEAR_CURRENT,UPDATE_LOG,SEARCH_LOGS,DELETE_TECH} from './type';
+import {GET_LOGS,SET_LOADING,LOGS_ERROR,ADD_LOG,DELETE_LOG,SET_CURRENT,CLEAR_CURRENT,UPDATE_LOG,SEARCH_LOGS,DELETE_TECH,ADD_TECH} from './type';
 
 // Fetch All Logs from server 
 
 export const getLogs = () => async dispatch => {
     try {
         setLoading()
-
         const res = await fetch('./logs');
         const data = await res.json();
 
@@ -63,17 +62,18 @@ export const addTech = (tech) => async dispatch => {
                 'Content-Type' : 'application/json'
             }
         });
+        console.log("tech.id",tech.id)
         // const data = await res.json();
-        // dispatch({
-        //     type: ADD_LOG,
-        //     payload : data
-        // });
+        dispatch({
+            type: ADD_TECH,
+            payload : tech.id
+        });
         
     } catch (err) {
-        dispatch({
-            type: LOGS_ERROR,
-            payload : err.response.data
-        });
+        // dispatch({
+        //     type: LOGS_ERROR,
+        //     payload : err.response.data
+        // });
     }
 }
 

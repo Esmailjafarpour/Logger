@@ -5,7 +5,7 @@ import {addTech} from '../action/logAction.js';
 import PropTypes from 'prop-types';
 
 
-const AddTechModal = ({addTech}) => {
+const AddTechModal = ({idTech,addTech}) => {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -14,10 +14,11 @@ const AddTechModal = ({addTech}) => {
         if (firstName === '' || lastName === '') {
             M.toast({html:"Please Enter a FirstName and LastName"})
         } else {
-
+            console.log("idTech",idTech)
             const newTech = {
                 firstName,
-                lastName
+                lastName,
+                id : idTech + 1
             }
 
             addTech(newTech);
@@ -74,6 +75,10 @@ const AddTechModal = ({addTech}) => {
 
 AddTechModal.propsTypes = { 
     addTech : PropTypes.func.isRequired,
-  }
+}
 
-export default connect(null,{addTech})(AddTechModal);
+const mapStateToProps = (state) => ({
+    idTech : state.log.idTech
+})
+
+export default connect(mapStateToProps,{addTech})(AddTechModal);

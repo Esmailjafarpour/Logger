@@ -1,11 +1,11 @@
-import {GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG,DELETE_LOG,SET_CURRENT,CLEAR_CURRENT,UPDATE_LOG,SEARCH_LOGS,DELETE_TECH} from '../components/action/type';
+import {GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG,DELETE_LOG,SET_CURRENT,CLEAR_CURRENT,UPDATE_LOG,SEARCH_LOGS,DELETE_TECH,ADD_TECH} from '../components/action/type';
 
 const initialState = {
     logs : null,
     current : null,
     loading : false,
     error : null,
-    idTech : false,
+    idTech : 0,
 }
 
 export default (state = initialState , action) => {
@@ -63,6 +63,14 @@ export default (state = initialState , action) => {
                 current : null
             }
 
+        case ADD_TECH:
+            
+            console.log("action.payload",action.payload) 
+        return{
+            ...state,
+            idTech : action.payload,
+        }
+        
         case DELETE_TECH:
             
             return{

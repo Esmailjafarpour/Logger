@@ -1,4 +1,5 @@
 import React ,{ useState,useEffect } from 'react';
+import M from 'materialize-css/dist/js/materialize.min.js';
 import TechItem from './TechItem';
 import {connect} from 'react-redux';
 import {deleteTech} from '../action/logAction';
@@ -8,11 +9,9 @@ function TechListModal({idTech,deleteTech}) {
     const [techs, setTechs] = useState([]);
     const [loading, setLoading] = useState(false);
 
+   
     useEffect(() => {
-        if(idTech !== false){
-            getTechs();
-        }
-    
+        getTechs();
     }, [idTech]);
 
     const getTechs = async () => {
@@ -20,10 +19,9 @@ function TechListModal({idTech,deleteTech}) {
         const res = await fetch('/techs');
         const data = await res.json();
         setTechs(data);
-        setLoading(false)
-        deleteTech(false)
+        setLoading(false) 
+        // M.toast({html:`Technecian Delete`})
     }
-
 
     return (
         <div className="modal" id="tech-list-modal">
